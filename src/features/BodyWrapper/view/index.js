@@ -139,7 +139,11 @@ const BodyWrapper = (props) => {
           },
         }}
       >
-        <Toolbar />
+        <Toolbar
+          sx={{
+            display: { md: "none", sm: "block", xs: "block" },
+          }}
+        />
         <Outlet />
       </Box>
     </Box>

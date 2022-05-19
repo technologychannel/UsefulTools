@@ -25,32 +25,71 @@ const QRGenerator = () => {
   return (
     <>
       <Grid container>
-        <Grid item xs={12}>
-          <Button color="primary" onClick={() => setQrType("text")}>
-            Plain Text/URL
-          </Button>
-          <Button color="primary" onClick={() => setQrType("gps")}>
-            GPS
-          </Button>
-          <Button color="primary" onClick={() => setQrType("mail")}>
-            Mail
-          </Button>
-          <Button color="primary" onClick={() => setQrType("phone")}>
-            Call
-          </Button>
-          <Button color="primary" onClick={() => setQrType("sms")}>
-            SMS
-          </Button>
-          <Button color="primary" onClick={() => setQrType("wifi")}>
-            Wifi
-          </Button>
+        <Grid container spacing={2}>
+          <Grid item>
+            <Button
+              variant="contained"
+              color="info"
+              onClick={() => setQrType("text")}
+            >
+              Plain Text/URL
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              variant="contained"
+              color="info"
+              onClick={() => setQrType("gps")}
+            >
+              GPS
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              variant="contained"
+              color="info"
+              onClick={() => setQrType("mail")}
+            >
+              Mail
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              variant="contained"
+              color="info"
+              onClick={() => setQrType("phone")}
+            >
+              Call
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              variant="contained"
+              color="info"
+              onClick={() => setQrType("sms")}
+            >
+              SMS
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button
+              variant="contained"
+              color="info"
+              onClick={() => setQrType("wifi")}
+            >
+              Wifi
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
       <Grid
         container
         spacing={4}
         mt={2}
-        sx={{ display: "flex", flexDirection: { md: "row", sm: "column-reverse" } }}
+        sx={{
+          display: "flex",
+          flexDirection: { md: "row", sm: "column-reverse" },
+        }}
       >
         <Grid item xs={matches ? 6 : 12} spacing={2}>
           <QRForm type={QrType} />
