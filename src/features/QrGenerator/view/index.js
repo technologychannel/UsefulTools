@@ -88,7 +88,7 @@ const QRGenerator = () => {
         mt={2}
         sx={{
           display: "flex",
-          flexDirection: { md: "row", sm: "column-reverse" },
+          flexDirection: { md: "row", sm: "column-reverse" , xs: "column-reverse" },
         }}
       >
         <Grid item xs={matches ? 6 : 12} spacing={2}>
