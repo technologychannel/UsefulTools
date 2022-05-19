@@ -1,16 +1,22 @@
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import CssBaseline from '@mui/material/CssBaseline';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
+import {
+  AppBar,
+  Divider,
+  IconButton,
+  Toolbar,
+  Typography,
+} from "@mui/material";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import MenuIcon from "@mui/icons-material/Menu";
 
-import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { useState } from "react";
+import { Outlet } from "react-router-dom";
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const BodyWrapper = (props) => {
   const { window } = props;
@@ -22,11 +28,20 @@ const BodyWrapper = (props) => {
 
   const drawer = (
     <div>
+      <Toolbar>
+        <img src="/logo.png" alt="logo" style={{ height: 52, width: 52 }} />
+        <Typography variant="h6" sx={{ fontWeight: "600", ml: 2 }}>
+          Technology Channel App
+        </Typography>
+      </Toolbar>
+      <Divider light fullWidth sx={{ borderColor: "#8d8d8d" }} />
       <List>
-        {['Qr Generator',].map((text, index) => (
+        {["Qr Generator"].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>        
-              <ListItemText primary={text} />
+            <ListItemButton
+              sx={{ fontWeight: "600", backgroundColor: "rgb(19 47 76)" }}
+            >
+              <ListItemText disableTypography primary={text} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -34,52 +49,64 @@ const BodyWrapper = (props) => {
     </div>
   );
 
-  const container = window !== undefined ? () => window().document.body : undefined;
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
+    <Box
+      sx={{
+        display: "flex",
+        backgroundColor: "#eaeded",
+        minHeight: "100vh",
+        maxHeight: "100%",
+      }}
+    >
       <AppBar
         position="fixed"
         sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          width: { md: `calc(100% - ${drawerWidth}px)` },
+          display: { md: "none" },
           ml: { sm: `${drawerWidth}px` },
+          backgroundColor: "#0A1929",
+          color: "#fff",
         }}
       >
-        {/* <Toolbar>
+        <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+            sx={{ mr: 2, display: { md: "none" } }}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Responsive drawer
+          <img src="/logo.png" alt="logo" style={{ height: 52, width: 52 }} />
+          <Typography variant="h6" sx={{ fontWeight: "600", ml: 2 }}>
+            Technology Channel App
           </Typography>
-        </Toolbar> */}
+        </Toolbar>
       </AppBar>
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        sx={{ width: { md: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           container={container}
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
-            display: { xs: "block", sm: "none" },
+            display: { md: "none", sm: "block", xs: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              backgroundColor: "#0A1929",
+              color: "#fff",
             },
           }}
         >
@@ -88,10 +115,12 @@ const BodyWrapper = (props) => {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: "none", sm: "block" },
+            display: { md: "block", sm: "none", xs: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+              backgroundColor: "#0A1929",
+              color: "#fff",
             },
           }}
           open
@@ -104,9 +133,15 @@ const BodyWrapper = (props) => {
         sx={{
           flexGrow: 1,
           p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          width: {
+            sm: `calc(100% - ${drawerWidth}px)`,
+            xs: `calc(100% - ${drawerWidth}px)`,
+          },
         }}
-      ><Outlet/></Box>
+      >
+        <Toolbar />
+        <Outlet />
+      </Box>
     </Box>
   );
 };

@@ -24,7 +24,7 @@ const useQrGenerator = () => {
   const [WifiAuthentication, setWifiAuthentication] = useState();
   const [WifiName, setWifiName] = useState("");
   const [WifiPassword, setWifiPassword] = useState("");
-  const [WifiHidden, setWifiHidden] = useState();
+  const [WifiHidden, setWifiHidden] = useState(false);
 
   useEffect(() => {
     dispatch(QrTextSlice.actions.setData(text));
@@ -68,7 +68,7 @@ const useQrGenerator = () => {
         `WIFI:T:${WifiAuthentication};S:${WifiName};${WifiAuthentication !== 'nopass' ? `P:${WifiPassword};` : ''}H:${WifiHidden};`
       )
     );
-  }, [WifiAuthentication, WifiHidden, WifiPassword, WifiHidden]); // eslint-disable-line
+  }, [WifiAuthentication, WifiName, WifiPassword, WifiHidden]); // eslint-disable-line
 
   return {
     text,
