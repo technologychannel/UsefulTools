@@ -219,8 +219,7 @@ const QRForm = (props) => {
                 onChange={(e) => setWifiAuthentication(e.target.value)}
               >
                 <MenuItem value="nopass">nopass</MenuItem>
-                <MenuItem value="WPA">WPA</MenuItem>
-                <MenuItem value="WPA2">WPA2</MenuItem>
+                <MenuItem value="WPA">WPA or WPA2</MenuItem>
                 <MenuItem value="WPA3">WPA3</MenuItem>
                 <MenuItem value="WEP">WEP</MenuItem>
               </Select>
