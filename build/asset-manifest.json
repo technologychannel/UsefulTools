@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.073c9b0a.css",
-    "main.js": "/static/js/main.aca784ce.js",
-    "static/js/787.0f8e8644.chunk.js": "/static/js/787.0f8e8644.chunk.js",
-    "index.html": "/index.html",
-    "main.073c9b0a.css.map": "/static/css/main.073c9b0a.css.map",
-    "main.aca784ce.js.map": "/static/js/main.aca784ce.js.map",
-    "787.0f8e8644.chunk.js.map": "/static/js/787.0f8e8644.chunk.js.map"
+    "main.css": "/technology-channel-app/static/css/main.073c9b0a.css",
+    "main.js": "/technology-channel-app/static/js/main.10ebd533.js",
+    "static/js/787.0f8e8644.chunk.js": "/technology-channel-app/static/js/787.0f8e8644.chunk.js",
+    "index.html": "/technology-channel-app/index.html",
+    "main.073c9b0a.css.map": "/technology-channel-app/static/css/main.073c9b0a.css.map",
+    "main.10ebd533.js.map": "/technology-channel-app/static/js/main.10ebd533.js.map",
+    "787.0f8e8644.chunk.js.map": "/technology-channel-app/static/js/787.0f8e8644.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.aca784ce.js"
+    "static/js/main.10ebd533.js"
   ]
 }
