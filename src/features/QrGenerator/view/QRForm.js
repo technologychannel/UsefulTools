@@ -8,6 +8,7 @@ import {
   Switch,
   TextField,
 } from "@mui/material";
+import { useEffect } from "react";
 import useQrGenerator from "../hooks/useQrGenerator";
 
 const MuiSwitch = styled((props) => (
@@ -78,7 +79,12 @@ const QRForm = (props) => {
     setWifiName,
     setWifiPassword,
     setWifiHidden,
+    setDefault,
   } = useQrGenerator();
+
+  useEffect(() => {
+    setDefault();
+  }, [props.type]);// eslint-disable-line
   return (
     <>
       {(props.type === undefined || props?.type === "text") && (

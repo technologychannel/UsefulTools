@@ -1,12 +1,10 @@
 import { Button, Grid, useMediaQuery } from "@mui/material";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import QR from "./QR";
 import QRForm from "./QRForm";
 
 const QRGenerator = () => {
   const [QrType, setQrType] = useState();
-  const Qrtext = useSelector((state) => state.QrTextSlice.data);
   const matches = useMediaQuery("(min-width:900px)");
 
   const downloadQRCode = () => {
@@ -17,7 +15,7 @@ const QRGenerator = () => {
       .replace("image/png", "image/octet-stream");
     let downloadLink = document.createElement("a");
     downloadLink.href = pngUrl;
-    downloadLink.download = `${Qrtext}.png`;
+    downloadLink.download = `qr.png`;
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);

@@ -70,6 +70,22 @@ const useQrGenerator = () => {
     );
   }, [WifiAuthentication, WifiName, WifiPassword, WifiHidden]); // eslint-disable-line
 
+  const setDefault=()=>{
+    setText("")
+    setLongitude("")
+    setLatitude("")
+    setMailTo("")
+    setMailSubject("")
+    setMailMessage("")
+    setPhoneNumber("")
+    setSMSMessage("")
+    setSMSPhoneNumber("")
+    setWifiAuthentication("")
+    setWifiName("")
+    setWifiPassword("")
+    setWifiHidden("")
+  }
+
   return {
     text,
     setText,
@@ -97,6 +113,7 @@ const useQrGenerator = () => {
     setWifiName,
     setWifiPassword,
     setWifiHidden,
+    setDefault
   };
 };
 
