@@ -80,6 +80,7 @@ const QRForm = (props) => {
     setWifiPassword,
     setWifiHidden,
     setDefault,
+    mailError
   } = useQrGenerator();
 
   useEffect(() => {
@@ -110,6 +111,7 @@ const QRForm = (props) => {
               <TextField
                 value={Latitude}
                 onChange={(e) => setLatitude(e.target.value)}
+                type="number"
                 fullWidth
                 id="outlined-basic"
                 label="Latitude"
@@ -136,6 +138,7 @@ const QRForm = (props) => {
               <TextField
                 value={mailTo}
                 onChange={(e) => setMailTo(e.target.value)}
+                error={mailError}
                 fullWidth
                 id="outlined-basic"
                 label="To"
@@ -172,6 +175,7 @@ const QRForm = (props) => {
               <TextField
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
+                type="number"
                 fullWidth
                 id="outlined-basic"
                 label="Phone Number"
@@ -188,6 +192,7 @@ const QRForm = (props) => {
               <TextField
                 value={SMSPhoneNumber}
                 onChange={(e) => setSMSPhoneNumber(e.target.value)}
+                type="number"
                 fullWidth
                 id="outlined-basic"
                 label="Phone Number"

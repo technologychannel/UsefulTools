@@ -12,6 +12,7 @@ const useQrGenerator = () => {
   const [mailTo, setMailTo] = useState("");
   const [mailSubject, setMailSubject] = useState("");
   const [mailMessage, setMailMessage] = useState("");
+  const [mailError, setMailError] = useState(false);
 
   //phone
   const [phoneNumber, setPhoneNumber] = useState();
@@ -65,26 +66,42 @@ const useQrGenerator = () => {
   useEffect(() => {
     dispatch(
       QrTextSlice.actions.setData(
-        `WIFI:T:${WifiAuthentication};S:${WifiName};${WifiAuthentication !== 'nopass' ? `P:${WifiPassword};` : ''}H:${WifiHidden};`
+        `WIFI:T:${WifiAuthentication};S:${WifiName};${
+          WifiAuthentication !== "nopass" ? `P:${WifiPassword};` : ""
+        }H:${WifiHidden};`
       )
     );
   }, [WifiAuthentication, WifiName, WifiPassword, WifiHidden]); // eslint-disable-line
 
-  const setDefault=()=>{
-    setText("")
-    setLongitude("")
-    setLatitude("")
-    setMailTo("")
-    setMailSubject("")
-    setMailMessage("")
-    setPhoneNumber("")
-    setSMSMessage("")
-    setSMSPhoneNumber("")
-    setWifiAuthentication("")
-    setWifiName("")
-    setWifiPassword("")
-    setWifiHidden("")
-  }
+  useEffect(() => {
+    const Regex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (mailTo) {
+      if (mailTo.match(Regex)) {
+        setMailError(false);
+      } else {
+        setMailError(true);
+      }
+    }else{
+      setMailError(false)
+    }
+  }, [mailTo]);
+
+  const setDefault = () => {
+    setText("");
+    setLongitude("");
+    setLatitude("");
+    setMailTo("");
+    setMailSubject("");
+    setMailMessage("");
+    setPhoneNumber("");
+    setSMSMessage("");
+    setSMSPhoneNumber("");
+    setWifiAuthentication("");
+    setWifiName("");
+    setWifiPassword("");
+    setWifiHidden("");
+  };
 
   return {
     text,
@@ -113,7 +130,8 @@ const useQrGenerator = () => {
     setWifiName,
     setWifiPassword,
     setWifiHidden,
-    setDefault
+    setDefault,
+    mailError,
   };
 };
 

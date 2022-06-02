@@ -82,7 +82,7 @@ const BodyWrapper = (props) => {
           >
             <MenuIcon />
           </IconButton>
-          <img src="/logo.png" alt="logo" style={{ height: 52, width: 52 }} />
+          <img src={Logo} alt="logo" style={{ height: 52, width: 52 }} />
           <Typography variant="h6" sx={{ fontWeight: "600", ml: 2 }}>
             Technology Channel App
           </Typography>
