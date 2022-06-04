@@ -32,7 +32,7 @@ const BodyWrapper = (props) => {
       <Toolbar>
         <img src={Logo} alt="logo" style={{ height: 52, width: 52 }} />
         <Typography variant="h6" sx={{ fontWeight: "600", ml: 2 }}>
-          Technology Channel App
+          Technology Channel Apps
         </Typography>
       </Toolbar>
       <Divider light fullWidth sx={{ borderColor: "#8d8d8d" }} />
@@ -84,7 +84,7 @@ const BodyWrapper = (props) => {
           </IconButton>
           <img src={Logo} alt="logo" style={{ height: 52, width: 52 }} />
           <Typography variant="h6" sx={{ fontWeight: "600", ml: 2 }}>
-            Technology Channel App
+            Technology Channel Apps
           </Typography>
         </Toolbar>
       </AppBar>
