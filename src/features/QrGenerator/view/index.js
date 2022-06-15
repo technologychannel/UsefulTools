@@ -9,7 +9,6 @@ const QRGenerator = () => {
   const matches = useMediaQuery("(min-width:900px)");
   const Qrtext = useSelector((state) => state.QrTextSlice.data);
   const downloadQRCode = () => {
-    console.log("hi", Qrtext);
     if (
       Qrtext === "http://maps.google.com/maps?q=," ||
       Qrtext === "mailto:?subject=&body=" ||
