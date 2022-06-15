@@ -8,9 +8,19 @@ const QRGenerator = () => {
   const [QrType, setQrType] = useState();
   const matches = useMediaQuery("(min-width:900px)");
   const Qrtext = useSelector((state) => state.QrTextSlice.data);
-
   const downloadQRCode = () => {
-    if (Qrtext) {
+    console.log("hi", Qrtext);
+    if (
+      Qrtext === "http://maps.google.com/maps?q=," ||
+      Qrtext === "mailto:?subject=&body=" ||
+      Qrtext === "WIFI:T:;S:;P:;H:;" ||
+      Qrtext === "tel:" ||
+      Qrtext === "smsto::" ||
+      Qrtext === "WIFI:T:;S:;P:;H:;" ||
+      Qrtext === ""
+    ) {
+      return 0;
+    } else {
       // Generate download with use canvas and stream
       const canvas = document.getElementById("qr-gen");
       const pngUrl = canvas

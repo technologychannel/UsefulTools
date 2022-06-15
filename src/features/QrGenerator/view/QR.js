@@ -20,7 +20,7 @@ const QR = () => {
         includeMargin
         size={matches ? 400 : 256}
         level="H"
-        value={Qrtext ? Qrtext : "http://technologychannel.org/"}
+        value={Qrtext}
       />
     </Box>
   );
