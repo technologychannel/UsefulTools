@@ -1,24 +1,28 @@
 import { Button, Grid, useMediaQuery } from "@mui/material";
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import QR from "./QR";
 import QRForm from "./QRForm";
 
 const QRGenerator = () => {
   const [QrType, setQrType] = useState();
   const matches = useMediaQuery("(min-width:900px)");
+  const Qrtext = useSelector((state) => state.QrTextSlice.data);
 
   const downloadQRCode = () => {
-    // Generate download with use canvas and stream
-    const canvas = document.getElementById("qr-gen");
-    const pngUrl = canvas
-      .toDataURL("image/png")
-      .replace("image/png", "image/octet-stream");
-    let downloadLink = document.createElement("a");
-    downloadLink.href = pngUrl;
-    downloadLink.download = `qr.png`;
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
+    if (Qrtext) {
+      // Generate download with use canvas and stream
+      const canvas = document.getElementById("qr-gen");
+      const pngUrl = canvas
+        .toDataURL("image/png")
+        .replace("image/png", "image/octet-stream");
+      let downloadLink = document.createElement("a");
+      downloadLink.href = pngUrl;
+      downloadLink.download = `qr.png`;
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    }
   };
   return (
     <>
@@ -86,7 +90,11 @@ const QRGenerator = () => {
         mt={2}
         sx={{
           display: "flex",
-          flexDirection: { md: "row", sm: "column-reverse" , xs: "column-reverse" },
+          flexDirection: {
+            md: "row",
+            sm: "column-reverse",
+            xs: "column-reverse",
+          },
         }}
       >
         <Grid item xs={matches ? 6 : 12} spacing={2}>

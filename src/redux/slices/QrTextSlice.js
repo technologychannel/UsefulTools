@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initState = {
   status: "ideal",
-  data: [],
+  data: '',
   error: false,
 };
 
