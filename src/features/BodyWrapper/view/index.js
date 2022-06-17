@@ -12,19 +12,25 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
-import Logo from "../../../common/assets/logo.png"
+import Logo from "../../../common/assets/logo.png";
 
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 const drawerWidth = 300;
 
 const BodyWrapper = (props) => {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
+  console.log("path", location.pathname);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+  //remove space from text
+  const remove_space = (text) => {
+    return text.replace(/ /g, "");
   };
 
   const drawer = (
@@ -37,14 +43,23 @@ const BodyWrapper = (props) => {
       </Toolbar>
       <Divider light fullWidth sx={{ borderColor: "#8d8d8d" }} />
       <List>
-        {["Qr Generator"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton
-              sx={{ fontWeight: "600", backgroundColor: "rgb(19 47 76)" }}
-            >
-              <ListItemText disableTypography primary={text} />
-            </ListItemButton>
-          </ListItem>
+        {["Qr Generator", "Privacy Policy Generator"].map((text, index) => (
+          <Link to={remove_space(text)}>
+            <ListItem key={text} disablePadding>
+              <ListItemButton
+                sx={{
+                  fontWeight: "600",
+                  backgroundColor:
+                    location.pathname.toLocaleLowerCase() ===
+                      remove_space("/" + text).toLocaleLowerCase() &&
+                    "rgb(19 47 76)",
+                  color: "#fff",
+                }}
+              >
+                <ListItemText disableTypography primary={text} />
+              </ListItemButton>
+            </ListItem>
+          </Link>
         ))}
       </List>
     </div>
@@ -69,7 +84,7 @@ const BodyWrapper = (props) => {
           display: { md: "none" },
           ml: { sm: `${drawerWidth}px` },
           backgroundColor: "#0A1929",
-          color: "#fff",
+          color: "#fff !important",
         }}
       >
         <Toolbar>

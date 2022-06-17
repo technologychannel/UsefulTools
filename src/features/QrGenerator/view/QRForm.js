@@ -11,7 +11,7 @@ import {
 import { useEffect } from "react";
 import useQrGenerator from "../hooks/useQrGenerator";
 
-const MuiSwitch = styled((props) => (
+export const MuiSwitch = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
 ))(({ theme }) => ({
   width: 42,
