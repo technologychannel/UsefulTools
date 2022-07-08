@@ -15,6 +15,7 @@ const usePrivacyGenerator = () => {
   const [advertise, setAdvertise] = useState(true);
   const [thirdparty, setThirdparty] = useState(true);
   const [error, setError] = useState(true);
+  const [entityType, setEntityType] = useState(true);
 
   const generatePolicy = (e) => {
     e.preventDefault();
@@ -54,7 +55,9 @@ const usePrivacyGenerator = () => {
     address,
     setAddress,
     generatePolicy,
-    error
+    error,
+    entityType,
+    setEntityType
   };
 };
 

@@ -30,7 +30,9 @@ const PrivacyPolicy = () => {
     address,
     setAddress,
     generatePolicy,
-    error
+    error,
+    entityType,
+    setEntityType,
   } = usePrivacyGenerator();
   const matches = useMediaQuery("(max-width:1200px)");
   const matches1 = useMediaQuery("(max-width:500px)");
@@ -43,17 +45,6 @@ const PrivacyPolicy = () => {
             <Grid container spacing={2} flexDirection={matches1 && "column"}>
               <Grid item xs={matches1 ? 12 : 6}>
                 <TextField
-                  value={companyName}
-                  onChange={(e) => setCompanyName(e.target.value)}
-                  type="text"
-                  fullWidth
-                  id="outlined-basic"
-                  label="Company Name"
-                  variant="outlined"
-                />
-              </Grid>
-              <Grid item xs={matches1 ? 12 : 6}>
-                <TextField
                   value={websiteName}
                   onChange={(e) => setWebsiteName(e.target.value)}
                   type="text"
@@ -63,42 +54,91 @@ const PrivacyPolicy = () => {
                   variant="outlined"
                 />
               </Grid>
-            </Grid>
-            <Grid container spacing={2} flexDirection={matches1 && "column"}>
-              <Grid item xs={matches1 ? 12 : 6} mt={2}>
+              <Grid item xs={matches1 ? 12 : 6}>
                 <TextField
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
                   type="text"
                   fullWidth
                   id="outlined-basic"
-                  label="Company Email"
-                  variant="outlined"
-                />
-              </Grid>
-              <Grid item xs={matches1 ? 12 : 6} mt={2}>
-                <TextField
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  type="text"
-                  fullWidth
-                  id="outlined-basic"
-                  label="Website Address"
+                  label="Website url"
                   variant="outlined"
                 />
               </Grid>
             </Grid>
-            <Grid mt={2}>
-              <TextField
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                type="text"
-                fullWidth
-                id="outlined-basic"
-                label="Company url"
-                variant="outlined"
-              />
+            <Grid
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+              mt={2}
+            >
+              <Typography variant="h6">Entity Type</Typography>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      onChange={() => setEntityType(true)}
+                      checked={entityType}
+                    />
+                  }
+                  label="I'm a Business"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      onChange={() => setEntityType(false)}
+                      checked={!entityType}
+                    />
+                  }
+                  label="I'm an Individual"
+                />
+              </FormGroup>
             </Grid>
+            {entityType && (
+              <>
+                <Grid
+                  container
+                  spacing={2}
+                  flexDirection={matches1 && "column"}
+                >
+                  <Grid item xs={matches1 ? 12 : 6} mt={2}>
+                    <TextField
+                      value={companyName}
+                      onChange={(e) => setCompanyName(e.target.value)}
+                      type="text"
+                      fullWidth
+                      id="outlined-basic"
+                      label="Company Name"
+                      variant="outlined"
+                    />
+                  </Grid>
+                  <Grid item xs={matches1 ? 12 : 6} mt={2}>
+                    <TextField
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      type="text"
+                      fullWidth
+                      id="outlined-basic"
+                      label="Company Email"
+                      variant="outlined"
+                    />
+                  </Grid>
+                </Grid>
+                <Grid mt={2}>
+                  <TextField
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    type="text"
+                    fullWidth
+                    id="outlined-basic"
+                    label="Company Address"
+                    variant="outlined"
+                  />
+                </Grid>
+              </>
+            )}
             <Grid
               sx={{
                 display: "flex",
@@ -183,7 +223,7 @@ const PrivacyPolicy = () => {
                 />
               </FormGroup>
             </Grid>
-              <Typography color="error">{error}</Typography>
+            <Typography color="error">{error}</Typography>
             <Grid mt={2}>
               <Button type="submit" variant="contained" color="info">
                 Generate
