@@ -1,6 +1,8 @@
 import {
+  Autocomplete,
   Button,
   Checkbox,
+  Chip,
   FormControlLabel,
   FormGroup,
   Grid,
@@ -23,8 +25,6 @@ const PrivacyPolicy = () => {
     setCookie,
     advertise,
     setAdvertise,
-    thirdparty,
-    setThirdparty,
     email,
     setEmail,
     address,
@@ -79,8 +79,8 @@ const PrivacyPolicy = () => {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      onChange={() => setEntityType(true)}
-                      checked={entityType}
+                      onChange={() => setEntityType("business")}
+                      checked={entityType === "business" && true}
                     />
                   }
                   label="I'm a Business"
@@ -88,57 +88,59 @@ const PrivacyPolicy = () => {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      onChange={() => setEntityType(false)}
-                      checked={!entityType}
+                      onChange={() => setEntityType("individual")}
+                      checked={entityType === "individual" && true}
                     />
                   }
                   label="I'm an Individual"
                 />
               </FormGroup>
             </Grid>
-            {entityType && (
-              <>
-                <Grid
-                  container
-                  spacing={2}
-                  flexDirection={matches1 && "column"}
-                >
-                  <Grid item xs={matches1 ? 12 : 6} mt={2}>
-                    <TextField
-                      value={companyName}
-                      onChange={(e) => setCompanyName(e.target.value)}
-                      type="text"
-                      fullWidth
-                      id="outlined-basic"
-                      label="Company Name"
-                      variant="outlined"
-                    />
-                  </Grid>
-                  <Grid item xs={matches1 ? 12 : 6} mt={2}>
-                    <TextField
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      type="text"
-                      fullWidth
-                      id="outlined-basic"
-                      label="Company Email"
-                      variant="outlined"
-                    />
-                  </Grid>
-                </Grid>
-                <Grid mt={2}>
+            <>
+              <Grid container spacing={2} flexDirection={matches1 && "column"}>
+                {entityType === "business" && (
+                  <>
+                    <Grid item xs={matches1 ? 12 : 6} mt={2}>
+                      <TextField
+                        value={companyName}
+                        onChange={(e) => setCompanyName(e.target.value)}
+                        type="text"
+                        fullWidth
+                        id="outlined-basic"
+                        label="Company Name"
+                        variant="outlined"
+                      />
+                    </Grid>
+                    <Grid item xs={matches1 ? 12 : 6} mt={2}>
+                      <TextField
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                        type="text"
+                        fullWidth
+                        id="outlined-basic"
+                        label="Company Address"
+                        variant="outlined"
+                      />
+                    </Grid>
+                  </>
+                )}
+                <Grid item xs={12} mt={2}>
                   <TextField
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     type="text"
                     fullWidth
                     id="outlined-basic"
-                    label="Company Address"
+                    label={
+                      entityType === "business"
+                        ? "Company Email"
+                        : "Personal Email"
+                    }
                     variant="outlined"
                   />
                 </Grid>
-              </>
-            )}
+              </Grid>
+            </>
             <Grid
               sx={{
                 display: "flex",
@@ -173,55 +175,34 @@ const PrivacyPolicy = () => {
             </Grid>
             <Grid mt={2}>
               <Typography variant="h6">
-                Do you show advertising through Google AdSense on your website?
+                Do you show advertising, Select Advertisment Platform?
               </Typography>
 
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      onChange={() => setAdvertise(true)}
-                      checked={advertise}
+              <Autocomplete
+                multiple
+                id="tags-filled"
+                options={["AdSense", "Admob", "FAN [Facebook Audience Network]", "Mopub", "Unity Ads"]}
+                freeSolo
+                onChange={(e,v)=>setAdvertise(v)}
+                value={advertise}
+                renderTags={(value, getTagProps) =>
+                  value.map((option, index) => (
+                    <Chip
+                    variant="outlined"
+                    label={option}
+                    {...getTagProps({ index })}
                     />
+                    ))
                   }
-                  label="Yes"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      onChange={() => setAdvertise(false)}
-                      checked={!advertise}
-                    />
-                  }
-                  label="No"
-                />
-              </FormGroup>
-            </Grid>
-            <Grid mt={2}>
-              <Typography variant="h6">
-                Do you show advertising from third parties (except Google)?
-              </Typography>
-
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      onChange={() => setThirdparty(true)}
-                      checked={thirdparty}
-                    />
-                  }
-                  label="Yes"
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      onChange={() => setThirdparty(false)}
-                      checked={!thirdparty}
-                    />
-                  }
-                  label="No"
-                />
-              </FormGroup>
+                  renderInput={(params) => (
+                    <TextField
+                    {...params}
+                    // variant="filled"
+                    label="Advertisment"
+                    placeholder="Advertisment"
+                  />
+                )}
+              />
             </Grid>
             <Typography color="error">{error}</Typography>
             <Grid mt={2}>

@@ -12,10 +12,9 @@ const usePrivacyGenerator = () => {
   const [address, setAddress] = useState("");
   const [url, setUrl] = useState("");
   const [cookie, setCookie] = useState(true);
-  const [advertise, setAdvertise] = useState(true);
-  const [thirdparty, setThirdparty] = useState(true);
+  const [advertise, setAdvertise] = useState([]);
   const [error, setError] = useState(true);
-  const [entityType, setEntityType] = useState(true);
+  const [entityType, setEntityType] = useState("business");
 
   const generatePolicy = (e) => {
     e.preventDefault();
@@ -27,13 +26,22 @@ const usePrivacyGenerator = () => {
       url: url,
       cookie: cookie,
       advertise: advertise,
-      thirdparty: thirdparty,
+      entityType: entityType,
     };
-    if (companyName && websiteName && email && address && url) {
-      dispatch(PolicySlice.actions.setData(data));
-      navigate("/privacypolicy");
-    }else{
-        setError("Please fill all the Data.")
+    if (data?.entityType === "business") {
+      if (companyName && websiteName && email && address && url) {
+        dispatch(PolicySlice.actions.setData(data));
+        navigate("/privacypolicy");
+      } else {
+        setError("Please fill all the Data.");
+      }
+    } else {
+      if (websiteName && url) {
+        dispatch(PolicySlice.actions.setData(data));
+        navigate("/privacypolicy");
+      } else {
+        setError("Please fill all the Data.");
+      }
     }
   };
 
@@ -48,8 +56,6 @@ const usePrivacyGenerator = () => {
     setCookie,
     advertise,
     setAdvertise,
-    thirdparty,
-    setThirdparty,
     email,
     setEmail,
     address,
@@ -57,7 +63,7 @@ const usePrivacyGenerator = () => {
     generatePolicy,
     error,
     entityType,
-    setEntityType
+    setEntityType,
   };
 };
 

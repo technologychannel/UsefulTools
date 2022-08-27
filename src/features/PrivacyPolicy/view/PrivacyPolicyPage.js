@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 const PrivacyPolicyPage = () => {
   const navigate = useNavigate();
   const policy = useSelector((state) => state.PolicySlice.data);
-  console.log(policy.companyName, policy.websiteName);
   useEffect(() => {
     if (
       !policy.companyName &&
@@ -27,7 +26,10 @@ const PrivacyPolicyPage = () => {
       }}
     >
       <Typography variant="h5">
-        Privacy Policy for {policy.companyName}
+        Privacy Policy for{" "}
+        {policy?.entityType === "company"
+          ? policy.companyName
+          : policy?.websiteName}
       </Typography>
       <Typography variant="body">
         At {policy.websiteName}, accessible from {policy.url}, one of our main
@@ -78,7 +80,7 @@ const PrivacyPolicyPage = () => {
           </Typography>
         </Box>
       )}
-      {(policy.advertise || policy.thirdparty) && (
+      {policy.advertise.length > 0 && (
         <Box mt={2}>
           <Typography variant="h5">Third-Party Ads Integration</Typography>
           <Typography variant="body">
@@ -88,14 +90,9 @@ const PrivacyPolicyPage = () => {
             information, IP address, location, and browser type
           </Typography>
           <ul>
-            {policy.advertise && (
-              <li style={{ overflow: "hidden" }}>
-                <a href="https://policies.google.com/technologies/ads">
-                  Google https://policies.google.com/technologies/ads
-                </a>
-              </li>
-            )}
-            {policy.thirdparty && <li>Other Third Party </li>}
+            {policy?.advertise?.map((value, index) => (
+              <li style={{ overflow: "hidden" }}>{value}</li>
+            ))}
           </ul>
         </Box>
       )}
@@ -115,8 +112,8 @@ const PrivacyPolicyPage = () => {
           not hesitate to contact us at:
         </Typography>
         <ul>
-          <li>Email: {policy.email}</li>
-          <li>Address: {policy.address} </li>
+          {policy?.email && <li>Email: {policy.email}</li>}
+          {policy?.address && <li>Address: {policy.address} </li>}
           <li>
             <a href={policy.url}>Visit Website</a>
           </li>
