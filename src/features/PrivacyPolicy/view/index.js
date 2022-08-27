@@ -179,23 +179,30 @@ const PrivacyPolicy = () => {
               </Typography>
 
               <Autocomplete
+                sx={{mt:2}}
                 multiple
                 id="tags-filled"
-                options={["AdSense", "Admob", "FAN [Facebook Audience Network]", "Mopub", "Unity Ads"]}
+                options={[
+                  "AdSense",
+                  "Admob",
+                  "FAN [Facebook Audience Network]",
+                  "Mopub",
+                  "Unity Ads",
+                ]}
                 freeSolo
-                onChange={(e,v)=>setAdvertise(v)}
+                onChange={(e, v) => setAdvertise(v)}
                 value={advertise}
                 renderTags={(value, getTagProps) =>
                   value.map((option, index) => (
                     <Chip
-                    variant="outlined"
-                    label={option}
-                    {...getTagProps({ index })}
+                      variant="outlined"
+                      label={option}
+                      {...getTagProps({ index })}
                     />
-                    ))
-                  }
-                  renderInput={(params) => (
-                    <TextField
+                  ))
+                }
+                renderInput={(params) => (
+                  <TextField
                     {...params}
                     // variant="filled"
                     label="Advertisment"
