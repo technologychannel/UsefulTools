@@ -93,7 +93,7 @@ const PrivacyPolicyPage = () => {
             </Typography>
           </Box>
         )}
-        {policy.advertise.length > 0 && (
+        {policy?.advertise?.length > 0 && (
           <Box mt={2}>
             <Typography variant="h5">Third-Party Ads Integration</Typography>
             <Typography variant="body">
